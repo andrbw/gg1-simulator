@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import subprocess
 from scipy import stats
@@ -18,8 +18,8 @@ def parseArguments():
   return parser.parse_args()
 
 def executeProgram(run, args):
-  result = subprocess.Popen("../src/scenario {} {} {} {}".format(run, args.lambd, args.mu, args.simtime), 
-            shell=True, stdout = subprocess.PIPE).stdout.read().split(" ")
+  result = subprocess.run("../src/scenario {} {} {} {}".format(run, args.lambd, args.mu, args.simtime), 
+            shell=True, capture_output=True).stdout.decode('utf-8').split(" ")
   return float(result[1])
 
 def confidenceInterval (serviceTimes, alpha):
